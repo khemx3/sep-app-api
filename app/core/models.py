@@ -23,6 +23,7 @@ class UserManager(BaseUserManager):
 
         return user
 
+
 class User(AbstractBaseUser, PermissionsMixin):
     """Custom user model that support using email instead of username"""
     email = models.EmailField(max_length=255, unique=True)
@@ -30,6 +31,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
+    # This basically tells Django how it's supposed to store the Object 
+    # and with what attributes depending on permissions.
     objects = UserManager()
-
+    
+    # A string describing the name of the field on the user model 
+    # that is used as the unique identifier. Must be UNQIUE
     USERNAME_FIELD = 'email'
